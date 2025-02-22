@@ -1,0 +1,79 @@
+﻿@using Manga.Logic
+@page "/"
+@inject MangaService service
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+@* put in the div here what you want to show when the button is clicked *@
+<div @attributes= "Attribute">
+    You clicked the button
+</div>
+
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th>
+                name
+            </th>
+            <th>
+                author
+            </th>
+            <th>
+                volume
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Objects.Manga manga in service.GetMangas())
+        {
+            <tr>
+                <td>
+                    @manga.Name
+                </td>
+                <td>
+                    @manga.Author
+                </td>
+                <td>
+                    @manga.Volume 
+                </td>
+                <td>
+                    <NavLink href ="@("/edit/" + manga.Id)"> edit</NavLink>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" class="accordion-button" @onclick="ButtonClick">
+    A button
+</button>
+<NavLink href="@("/Add")">
+<button type="button" class="btn btn-link">
+    Add to list
+</button>
+</NavLink>
+
+<NavLink href ="@("/Mastermind")">
+<a> Mastermind </a>
+</NavLink>
+@code{
+    //we declare a attribute and put a style in there
+    public Dictionary<string,object> Attribute { get; set; }
+
+    //create the attribute on the loading of a page 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Attribute = new();
+        Attribute.Add("style", "display:none");
+        service = new MangaService();
+    }
+    //when the button is clicked, change the display
+    public void ButtonClick()
+    {
+        Attribute["style"] = "display:block";
+    }
+}

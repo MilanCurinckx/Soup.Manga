@@ -1,0 +1,46 @@
+﻿@using Manga.Logic
+@page "/edit/{id:int}"
+@inject MangaService service
+@inject NavigationManager navmanager
+<h3>Edit</h3>
+
+<div class="form-group">
+    <label>Name</label>
+    <input type="text" class ="form-control" @bind-value ="manga.Name" />
+</div>
+
+<div class="form-group">
+    <label>Author</label>
+    <input type="text" class="form-control" @bind-value="manga.Author" />
+</div>
+<div class="form-group">
+    <label>Volume</label>
+    <input type="text" class="form-control" @bind-value="manga.Volume" />
+</div>
+
+<button type="button" class="accordion-button" @onclick="SaveChanges">
+    save changes
+</button>
+
+<NavLink href="/">
+    go back
+</NavLink>
+
+@code {
+    [Parameter]
+    public int id { get; set; }
+
+    Objects.Manga manga { get; set; }
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        this.manga = service.GetMangaById(id);
+    }
+
+    public void SaveChanges()
+    {
+        service.UpdateManga(manga);
+        navmanager.NavigateTo("/");
+    }
+
+}
