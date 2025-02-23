@@ -1,4 +1,4 @@
-﻿@using Manga.Logic
+﻿@using Soup.Manga.Logic
 @page "/edit/{id:int}"
 @inject MangaService service
 @inject NavigationManager navmanager
@@ -18,7 +18,7 @@
     <input type="text" class="form-control" @bind-value="manga.Volume" />
 </div>
 
-<button type="button" class="accordion-button" @onclick="SaveChanges">
+<button type="button" @onclick="SaveChanges">
     save changes
 </button>
 

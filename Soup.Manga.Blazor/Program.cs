@@ -1,4 +1,5 @@
 using Soup.Manga.Blazor.Components;
+using Soup.Manga.Blazor.Components.Pages;
 using Soup.Manga.Logic;
 
 namespace Soup.Manga.Blazor
@@ -13,6 +14,7 @@ namespace Soup.Manga.Blazor
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
             builder.Services.AddTransient<MangaService>();
+            builder.Services.AddSingleton<MastermindService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

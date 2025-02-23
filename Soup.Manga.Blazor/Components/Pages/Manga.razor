@@ -1,0 +1,54 @@
+﻿@using Soup.Manga.Logic
+@inject MangaService service
+@page "/Manga"
+<PageTitle>Manga</PageTitle>
+<h3>Manga</h3>
+
+
+
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+            <th>
+                name
+            </th>
+            <th>
+                author
+            </th>
+            <th>
+                volume
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Objects.Manga manga in service.GetMangas())
+        {
+            <tr>
+                <td>
+                    @manga.Name
+                </td>
+                <td>
+                    @manga.Author
+                </td>
+                <td>
+                    @manga.Volume
+                </td>
+                <td>
+                    <NavLink href="@("/edit/" + manga.Id)"> edit</NavLink>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* put a button in a navlink, you can tell the navlink to what page the button then needs to surf *@
+<NavLink href="@("/Add")">
+    <button type="button" class="btn btn-link">
+        Add to list
+    </button>
+</NavLink>
+
+@code {
+
+}

@@ -1,5 +1,7 @@
-﻿<h3>Mastermind</h3>
+﻿@using Soup.Manga.Logic
+<h3>Mastermind</h3>
 @inject NavigationManager navmanager
+@inject MastermindService service;
 @page "/Mastermind"
 
 <div> 
@@ -7,7 +9,44 @@
     I have chosen a number, can you guess it?
 
 </div>
+
+<input type="number" value="1"/> 
+
+<button @onclick="Guess">Guess</button>
+
+<p @attributes=ShowCounter role="status">Total guesses so far: @currentCount</p>
+
+<div>
+    @result
+</div>
 @code {
-    var randomNumber = new Random(ra);
-    randomNumer
+    int inputNumber{ get; set; }
+    string result{ get;set; }
+    private int currentCount = 0;
+
+    public Dictionary<string, object> ShowCounter { get; set; }
+
+    //create an instance of the attribute on the loading of a page
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ShowCounter = new();
+        ShowCounter.Add("style", "display:none");
+    }
+    //when the button is clicked, change the display
+    public void Show()
+    {
+        ShowCounter["style"] = "display:block";
+    }
+    public void Guess()
+    {
+        result= service.GuessNumber(inputNumber);
+        IncrementCount();
+        Show();
+    }
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
 }
