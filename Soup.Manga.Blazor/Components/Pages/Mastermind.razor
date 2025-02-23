@@ -10,7 +10,7 @@
 
 </div>
 
-<input type="number" value="1"/> 
+<input type="number" @bind-value="@inputNumber"/> 
 
 <button @onclick="Guess">Guess</button>
 
@@ -19,7 +19,9 @@
 <div>
     @result
 </div>
+
 @code {
+
     int inputNumber{ get; set; }
     string result{ get;set; }
     private int currentCount = 0;
@@ -33,11 +35,12 @@
         ShowCounter = new();
         ShowCounter.Add("style", "display:none");
     }
-    //when the button is clicked, change the display
+    //when this is called, change the style on an attribute 
     public void Show()
     {
         ShowCounter["style"] = "display:block";
     }
+    //This is run when the Guess button is clicked, prompting the service, updating the tracker and showing the result 
     public void Guess()
     {
         result= service.GuessNumber(inputNumber);
