@@ -11,6 +11,8 @@
 @* put in the div here what you want to show when the button is clicked *@
 <div @attributes= "Attribute">
     You clicked the button
+        <TestComponent1  />
+        @* <TestComponent3/> *@
 </div>
 
 
@@ -27,6 +29,16 @@
     <button> Mastermind </button>
 </NavLink>
 
+    <NavLink href="@("/Counter")">
+        <button>Counter </button>
+    </NavLink>
+
+<div>
+    
+    @* <TestComponent4 Text="You seeing this shit?"/> you can give along parameters if you define them as properties in the object, but these are literal values  *@
+        <TestComponent4 NameOfChild="Rose" Visible="true" />
+    
+</div>
 </body>
 @code{
     //we declare a attribute and put a style in there, as a reminder, an attribute is technically just a property of a thing
@@ -43,5 +55,9 @@
     public void ButtonClick()
     {
         Attribute["style"] = "display:block";
+    }
+    public void VisibleComponent()
+    {
+        
     }
 }

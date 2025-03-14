@@ -1,0 +1,33 @@
+﻿@if (Visible)
+{
+    <h3>@Text</h3>
+}
+<input value=@InputSize/>
+<input value=@DoubleInputSize()/>
+<Child Name="@NameOfChild" SayHI="Reply"/>
+<span>My child says: "@childText"</span>
+@code {
+    [Parameter]
+    public bool Visible { get; set; } = false;
+    [Parameter]
+    public string? Text { get; set; }
+    [Parameter]
+    public String? NameOfChild { get; set; }
+
+    string childText;
+
+    private void Reply(string reply)
+    {
+        childText = reply;
+    }
+
+    int InputSize = 8;
+    bool HeaderVisible = false;
+    string HeaderText = "Value of variable";
+
+    private int DoubleInputSize()
+    {
+        return InputSize * 2;
+    }
+
+}

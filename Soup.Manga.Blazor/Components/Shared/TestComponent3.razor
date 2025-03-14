@@ -1,0 +1,37 @@
+﻿<div class="row">
+    <div class="col-4">To HTML attribute using .ToString()</div>
+    <div class="col-8"><input readonly value=@MyPerson /></div>
+    
+</div>
+
+<div class="row">
+    <div class="col-4">To component as object</div>
+    <div class="col-8">
+        <PersonView Person=@MyPerson />
+    </div>
+</div>
+
+@code
+{
+    Person MyPerson;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        MyPerson = new Person
+            {
+                Salutation = "Mr",
+                GivenName = "Peter",
+                FamilyName = "Morris"
+            };
+    }
+    public class Person
+    {
+        public string Salutation { get; set; }
+        public string GivenName { get; set; }
+        public string FamilyName { get; set; }
+
+        public override string ToString() => $"{Salutation} {GivenName} {FamilyName}";
+    }
+
+}
